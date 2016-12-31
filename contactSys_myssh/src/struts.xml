@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<package name="emp" extends="struts-default">
+		<!-- 拦截器配置 -->
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.Aiden.action.UserInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 执行指定的拦截器 -->
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="success">/index.jsp</result>
+			
+			<result name="login" type="redirect">/login.jsp</result>
+			
+			<!-- 错误视图配置 -->
+			<result name="null">/error/null.jsp</result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		
+		<action name = "emp_*" class = "employeeAction" method = "{1}">
+		
+			<result name = "list">/WEB-INF/list.jsp</result>
+			<result name = "viewAddEmp">/WEB-INF/viewAddEmp.jsp</result>
+			<result name = "edit">/WEB-INF/edit.jsp</result>
+		</action>
+		
+		<action name="admin_*" class="com.Aiden.action.AdminAction" method="{1}">
+		
+			<!-- 登陆失败 -->
+			<result name="loginFail">/login.jsp</result>
+			
+			<!-- 登陆成功 -->
+			<result name="index" type="redirectAction">emp_list</result>
+			<result name="list" type="redirectAction">emp_list</result>
+		</action>
+	</package>
+
+</struts>
