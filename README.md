@@ -1,2 +1,4 @@
 # JavaWeb
 javaweb练习项目
+contactSys_jdbc为不实用框架实现对联系人数据库的CURD，并显示在网页上。
+contactSys_myssh为使用SS2H框架实现类似功能。
